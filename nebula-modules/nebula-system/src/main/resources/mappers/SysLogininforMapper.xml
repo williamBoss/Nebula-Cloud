@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nebula.system.mapper.SysLogininforMapper">
+    <resultMap id="BaseResultMap" type="com.nebula.system.domain.SysLogininfor">
+        <id column="info_id" jdbcType="BIGINT" property="infoId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="client_key" jdbcType="VARCHAR" property="clientKey"/>
+        <result column="device_type" jdbcType="VARCHAR" property="deviceType"/>
+        <result column="ipaddr" jdbcType="VARCHAR" property="ipaddr"/>
+        <result column="login_location" jdbcType="VARCHAR" property="loginLocation"/>
+        <result column="browser" jdbcType="VARCHAR" property="browser"/>
+        <result column="os" jdbcType="VARCHAR" property="os"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="msg" jdbcType="VARCHAR" property="msg"/>
+        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        `info_id`, `user_name`, `client_key`, `device_type`, `ipaddr`, `login_location`, `browser`, `os`, `status`, `msg`, `login_time`
+    </sql>
+
+</mapper>

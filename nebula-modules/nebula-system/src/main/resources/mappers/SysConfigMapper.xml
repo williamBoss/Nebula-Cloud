@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nebula.system.mapper.SysConfigMapper">
+  <resultMap id="BaseResultMap" type="com.nebula.system.domain.SysConfig">
+    <id column="config_id" jdbcType="INTEGER" property="configId"/>
+    <result column="config_name" jdbcType="VARCHAR" property="configName"/>
+    <result column="config_key" jdbcType="VARCHAR" property="configKey"/>
+    <result column="config_value" jdbcType="VARCHAR" property="configValue"/>
+    <result column="config_type" jdbcType="CHAR" property="configType"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    `config_id`,
+    `config_name`,
+    `config_key`,
+    `config_value`,
+    `config_type`
+  </sql>
+</mapper>

@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+# Spring
+spring:
+  application:
+    # 应用名称
+    name: nebula-auth
+  profiles:
+    # 环境配置
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        # 服务注册地址
+        username: nacos
+        password: nacos
+      config:
+        # 配置中心地址
+        username: nacos
+        password: nacos
+        context-path: /nacos
+        # 配置文件格式
+        file-extension: yml
+  config:
+    import:
+      - application-${spring.profiles.active}.yml
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+      - optional:nacos:redisson-application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}

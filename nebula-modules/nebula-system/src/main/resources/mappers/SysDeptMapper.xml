@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nebula.system.mapper.SysDeptMapper">
+    <resultMap id="BaseResultMap" type="com.nebula.system.domain.SysDept">
+        <id column="dept_id" jdbcType="BIGINT" property="deptId"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="ancestors" jdbcType="VARCHAR" property="ancestors"/>
+        <result column="dept_name" jdbcType="VARCHAR" property="deptName"/>
+        <result column="leader" jdbcType="BIGINT" property="leader"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        `dept_id`, `parent_id`, `ancestors`, `dept_name`, `leader`, `phone`, `email`, `status`
+    </sql>
+
+</mapper>

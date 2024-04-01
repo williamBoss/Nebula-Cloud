@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-constant/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-constant/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-datasource/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-datasource/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-json/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-json/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-log/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-log/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-redis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/nebula-common-redis/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-modules/nebula-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-modules/nebula-auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-modules/nebula-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-modules/nebula-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-modules/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nebula-modules/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

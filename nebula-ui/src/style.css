@@ -1,0 +1,91 @@
+@import 'open-props/open-props.min.css';
+@import 'variables.css';
+@import 'style/transition.css';
+
+html,
+body,
+#app {
+  font-family: 'Source Han Sans SC', sans-serif;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: #f4f6fb;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+/* flex */
+.flx {
+  display: flex;
+}
+
+.flx-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flx-justify-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flx-right {
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+/* 文字单行省略号 */
+.sle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 文字多行省略号 */
+.mle {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* 文字多了自動換行 */
+.break-word {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.table .table-search {
+  margin-bottom: var(--size-2);
+}
+
+.table .table-operation {
+  margin-bottom: var(--size-3);
+}
+
+.table-header-row-class {
+  border-radius: 4px 4px 0 0;
+  color: #222222;
+}
+
+.table-header-cell-class {
+  background-color: #f5f5ff !important;
+  color: #303133;
+}
+
+.card.rounded {
+  border-radius: var(--radius-2);
+}
+
+.card.is-plain {
+  border-width: 0;
+}
+
+.card .title {
+  color: rgba(0, 0, 0, 0.88);
+  font-weight: 600;
+  font-size: var(--font-size-1);
+}

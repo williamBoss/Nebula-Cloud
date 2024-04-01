@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.103.5.196:8488
+        namespace: 38db37e5-01c7-4447-8e56-117f8b43c106 # dev 命名空间id
+      config:
+        # 配置中心地址
+        server-addr: 47.103.5.196:8488
+        namespace: 38db37e5-01c7-4447-8e56-117f8b43c106 # dev 命名空间id
+
+mybatis-flex:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

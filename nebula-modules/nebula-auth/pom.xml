@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.nebula</groupId>
+    <artifactId>nebula-modules</artifactId>
+    <version>2024.0.0</version>
+  </parent>
+
+  <artifactId>nebula-auth</artifactId>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.nebula</groupId>
+      <artifactId>nebula-common-core</artifactId>
+      <version>2024.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nebula</groupId>
+      <artifactId>nebula-common-redis</artifactId>
+      <version>2024.0.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.nebula</groupId>
+      <artifactId>nebula-common-log</artifactId>
+      <version>2024.0.0</version>
+    </dependency>
+
+    <!--验证码 -->
+    <dependency>
+      <groupId>com.github.penggle</groupId>
+      <artifactId>kaptcha</artifactId>
+      <version>2.3.2</version>
+    </dependency>
+  </dependencies>
+
+</project>
