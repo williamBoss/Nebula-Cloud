@@ -5,6 +5,8 @@ import { LoginService, UserService } from '@api/sys-api.ts'
 import piniaPersistConfig from '@/config/persist.ts'
 import { reactive, toRefs } from 'vue'
 import { userStore } from '@/store/modules/user.ts'
+import { authStore } from '@/store/modules/auth.ts'
+import { transformMenuItem } from '@/utils/util.ts'
 
 const pinia = createPinia()
 pinia.use(pinaPluginPersistence)
@@ -58,24 +60,26 @@ export const globalStore = defineStore(
       return new Promise((resolve, reject) => {
         UserService.user
           .getInfo()
-          .then((res) => {
-            const user = userStore()
-            const { data }: any = res
-            const userInfo = data.user
+          .then((data) => {
+            const _userStore = userStore()
+            const { menus, role, user, permissions }: any = data
             // 验证返回的roles是否是一个非空数组
-            if (data.roles && data.roles.length > 0) {
-              user.setRoleNames(data.roles)
-              user.setPermissions(data.permissions)
+            if (role) {
+              _userStore.setRoleNames([role.roleName])
+              _userStore.setPermissions(permissions)
             } else {
-              user.setRoleNames(['ROLE_DEFAULT'])
+              _userStore.setRoleNames(['ROLE_DEFAULT'])
             }
-            if (userInfo.nickName !== null) {
-              user.setName(userInfo.nickName)
+            if (user.nickName !== null) {
+              _userStore.setName(user.nickName)
             }
-            if (userInfo.avatar !== null) {
-              user.setAvatar(userInfo.avatar)
+            if (user.avatar !== null) {
+              _userStore.setAvatar(user.avatar)
             }
-            state.userInfo = userInfo
+            state.userInfo = user
+            const auth = authStore()
+            const routers = menus.map((item: any) => transformMenuItem(item))
+            auth.setAuthMenuList(routers)
             resolve(data)
           })
           .catch((error) => {
@@ -85,14 +89,16 @@ export const globalStore = defineStore(
     }
     // 退出系统
     const logOut = () => {
-      return new Promise((_resolve, reject) => {
+      return new Promise((resolve, reject) => {
         LoginService.auth
           .logout()
-          .then(() => {
+          .then((res) => {
             const user = userStore()
             state.token = ''
+            state.userInfo = {}
             user.setRoleNames([])
             user.setPermissions([])
+            resolve(res)
           })
           .catch((error) => {
             reject(error)

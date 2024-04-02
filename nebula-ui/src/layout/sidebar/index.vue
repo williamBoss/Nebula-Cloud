@@ -41,6 +41,7 @@ import SubMenu from '@/layout/sidebar/subMenu/index.vue'
 import { staticRouter } from '@/router/modules/staticRouter'
 import { HOME_ROUTER_NAME } from '@/config/config.js'
 import { useRoute } from 'vue-router'
+import { authStore } from '@/store/modules/auth.ts'
 
 defineComponent({
   name: 'SidebarMenu'
@@ -54,11 +55,14 @@ const defaultActiveMenu = computed(() => {
   return name || HOME_ROUTER_NAME
 })
 
-// todo 暂时使用静态路由生成菜单 后面需要调整为接口获取
-// const menu = AuthStore()
-const menu = staticRouter.find((e) => e.name === 'home')
 const title = ref(import.meta.env.VITE_APP_TITLE)
 const headerLogo = ref(import.meta.env.VITE_APP_HEADER_LOGO)
+const auth = authStore()
+const menu = computed(() => {
+  const router = staticRouter.find((e) => e.name === 'home')
+  router.children = auth.showMenuListGet()
+  return router
+})
 </script>
 
 <style scoped>

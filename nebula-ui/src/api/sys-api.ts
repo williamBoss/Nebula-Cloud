@@ -119,7 +119,7 @@ export class UserService {
   private static BASE_USER_URL = `${system}/sysUser`
 
   static user = {
-    getInfo: () => Request.get<User>(`${this.BASE_USER_URL}/getInfo`),
+    getInfo: () => Request.get<User>(`${this.BASE_USER_URL}/loginUserInfo`),
 
     getInfoById: (userId: string | number) => Request.get<User>(`${this.BASE_USER_URL}/${userId}`),
 

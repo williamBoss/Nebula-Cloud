@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import pinia, { globalStore } from '@/store/index.ts'
-import { ElMessage as elMessage } from 'element-plus'
 import { errorRouter, staticRouter } from '@/router/modules/staticRouter.js'
 import { LOGIN_URL } from '@/config/config.ts'
 import { initDynamicRouter } from '@/router/modules/dynamicRouter.js'
@@ -33,7 +32,7 @@ router.beforeEach((to, _from, next) => {
     })
   } else if (to.meta.requiresAuth) {
     // 判断当前用户是否已拉取完user_info信息
-    if (global.userInfo || Object.keys(global.userInfo).length !== 0) {
+    if (global.userInfo && Object.keys(global.userInfo).length !== 0) {
       next()
       return
     }
@@ -46,9 +45,12 @@ router.beforeEach((to, _from, next) => {
         })
       })
       .catch((err) => {
+        console.error(err)
         global.logOut().then(() => {
-          elMessage.error(err)
-          next({ path: '/' })
+          next({
+            path: '/login',
+            replace: true
+          })
         })
       })
   } else {

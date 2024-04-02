@@ -1,5 +1,6 @@
 import pinyin from 'js-pinyin'
 import { FormInstance } from 'element-plus'
+import { Menu } from '@api/types/sys-api'
 
 /**
  * @description 获取当前时间
@@ -120,6 +121,30 @@ export function getCurrentBreadcrumb(path: string, menuList: any[]): any[] | und
   } catch (e) {
     return tempPath
   }
+}
+
+/**
+ * @description 递归处理菜单数据，生成符合路由菜单格式的数据
+ * @param menu
+ */
+export function transformMenuItem(menu: Menu) {
+  const transformMenu = {
+    path: menu.path,
+    name: menu.path.split('/').pop(),
+    component: () => import(menu.component),
+    meta: {
+      requiresAuth: true,
+      title: menu.menuName,
+      icon: menu.icon,
+      iconType: menu.iconType,
+      hidden: menu.visible === '1'
+    },
+    children: [] as any[]
+  }
+  if (menu.children && menu.children.length > 0) {
+    transformMenu.children = menu.children.map((child) => transformMenuItem(child))
+  }
+  return transformMenu
 }
 
 /**

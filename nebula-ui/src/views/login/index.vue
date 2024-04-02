@@ -119,6 +119,7 @@ const login = (formEl: FormInstance) => {
         })
         .catch((reason) => {
           console.error('login:{}', reason)
+          Object.assign(loginForm, { username: '', password: '', captcha: '', uuid: '' })
           getCode()
         })
     } finally {

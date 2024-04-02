@@ -61,13 +61,13 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
 import { CaretBottom, Expand, Fold, User } from '@element-plus/icons-vue'
 import { userStore } from '@/store/modules/user.ts'
 import defaultAvatar from '@/assets/images/profile.jpg'
 import { defineComponent } from 'vue'
 import Breadcrumb from '@components/Breadcrumb/index.vue'
-import { LoginService } from '@api/sys-api.ts'
+import { globalStore } from '@/store'
+import { useRouter } from 'vue-router'
 
 defineComponent({
   name: 'PageHeader'
@@ -81,6 +81,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:sidebarCollapse'])
 const router = useRouter()
+const global = globalStore()
 // 用户信息变量
 const user = userStore()
 const { avatar } = user
@@ -93,8 +94,7 @@ const toggle = () => {
 
 // ↓登出
 const signOut = () => {
-  LoginService.auth.logout().then(() => {
-    // TODO 有store变量后需清除store变量
+  global.logOut().then(() => {
     router.push('/login')
   })
 }

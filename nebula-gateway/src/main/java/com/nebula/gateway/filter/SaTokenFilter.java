@@ -64,7 +64,7 @@ public class SaTokenFilter {
         config.setTokenName(TokenConstants.AUTHENTICATION);
         config.setTokenPrefix(TokenConstants.PREFIX);
         // token 有效期（单位：秒），默认30天，-1:代表永不过期
-        config.setTimeout(Constants.TOKEN_EXPIRE * 60);
+        config.setTimeout(Constants.TOKEN_EXPIRE);
         // token 最低活跃频率（单位：秒），如果 token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
         config.setActiveTimeout(-1);
         config.setIsReadBody(false);

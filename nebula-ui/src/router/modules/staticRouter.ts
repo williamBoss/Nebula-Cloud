@@ -33,8 +33,8 @@ export const staticRouter = [
           iconType: 'el',
           hidden: false
         }
-      },
-      {
+      }
+      /*{
         path: '/system/user',
         name: 'user',
         component: () => import('@/views/system/user/index.vue'),
@@ -93,7 +93,7 @@ export const staticRouter = [
           iconType: 'el',
           hidden: false
         }
-      }
+      }*/
     ]
   }
 ]
