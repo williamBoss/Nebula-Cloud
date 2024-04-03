@@ -29,8 +29,7 @@
           <div class="header-tool avatar">
             <el-avatar :src="avatar === '' ? defaultAvatar : avatar"></el-avatar>
             <span class="nickName">
-              <!--{{ user.nickName }}-->
-              admin
+              {{ user.nickName }}
             </span>
             <el-icon>
               <caret-bottom />

@@ -14,10 +14,15 @@ export const userStore = defineStore(
       avatar: string
       admin: boolean
       roleNames: string[]
+      // 权限集合
       permissions: string[]
+      // 左侧菜单树形结构
+      menuTree: any[]
+      // 存在页面路由的菜单集合
+      menuRouterList: any[]
     }
 
-    const state: State = reactive({
+    const defaultState = () => ({
       userName: '',
       nickName: '',
       email: '',
@@ -26,8 +31,34 @@ export const userStore = defineStore(
       avatar: '',
       admin: false,
       roleNames: [],
-      permissions: []
+      permissions: [],
+      menuTree: [],
+      menuRouterList: []
     })
+
+    const state: State = reactive(defaultState())
+
+    //设置登录信息
+    const setUserLoginInfo = (data: any) => {
+      const { menus, role, user, permissions }: any = data
+      // 验证返回的roles是否是一个非空数组
+      if (role) {
+        state.roleNames = [role.roleName]
+        state.permissions = permissions
+      } else {
+        state.roleNames = ['ROLE_DEFAULT']
+      }
+      if (user.nickName) {
+        state.nickName = user.nickName
+      }
+      if (user.avatar) {
+        state.avatar = user.avatar
+      }
+      //菜单
+      state.menuTree = menus
+      //拥有路由的菜单
+      state.menuRouterList = menus.filter((e: any) => e.menuType === 'C')
+    }
 
     const setName = (nickName: string) => {
       state.nickName = nickName
@@ -44,6 +75,8 @@ export const userStore = defineStore(
 
     return {
       ...toRefs(state),
+      defaultState,
+      setUserLoginInfo,
       setName,
       setAvatar,
       setRoleNames,

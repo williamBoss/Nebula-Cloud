@@ -1,5 +1,9 @@
 <template>
-  <div class="login-container flx-center">
+  <div
+    class="login-container flx-center"
+    v-loading.fullscreen.lock="loading"
+    element-loading-text="登录中..."
+  >
     <div class="logo">
       <img
         src="@/assets/images/logo/250x60.png"
@@ -52,7 +56,6 @@
         </el-form>
         <div class="login-btn">
           <el-button
-            :loading="loading"
             size="large"
             @click="login(loginFormRef)"
           >
@@ -73,6 +76,7 @@ import { useRouter } from 'vue-router'
 import { HOME_URL } from '@/config/config'
 import { globalStore } from '@/store'
 import { LoginService } from '@api/sys-api.js'
+import { buildRoutes } from '@/router'
 
 defineComponent({
   name: 'LoginSys'
@@ -103,28 +107,35 @@ const login = (formEl: FormInstance) => {
   formEl.validate(async (valid) => {
     if (!valid) return
     loading.value = true
-    try {
-      LoginService.auth
-        .login(loginForm.username, loginForm.password, loginForm.captcha, loginForm.uuid)
-        .then((res) => {
-          const { data }: any = res
-          global.token = data.access_token
-          router.replace(HOME_URL)
-          elNotification({
-            title: getTimeState(),
-            message: `欢迎登录${title.value}`,
-            type: 'success',
-            duration: 3000
+    LoginService.auth
+      .login(loginForm.username, loginForm.password, loginForm.captcha, loginForm.uuid)
+      .then((res) => {
+        const { data }: any = res
+        global.token = data.access_token
+        // 获取用户信息
+        global
+          .getUserInfo()
+          .then(() => {
+            // 组建路由
+            buildRoutes()
           })
-        })
-        .catch((reason) => {
-          console.error('login:{}', reason)
-          Object.assign(loginForm, { username: '', password: '', captcha: '', uuid: '' })
-          getCode()
-        })
-    } finally {
-      loading.value = false
-    }
+          .then(() => {
+            console.log(router.getRoutes())
+            router.replace(HOME_URL)
+            elNotification({
+              title: getTimeState(),
+              message: `欢迎登录${title.value}`,
+              type: 'success',
+              duration: 3000
+            })
+          })
+      })
+      .catch((reason) => {
+        console.error('login:{}', reason)
+        Object.assign(loginForm, { username: '', password: '', captcha: '', uuid: '' })
+        getCode()
+      })
+      .finally(() => (loading.value = false))
   })
 }
 

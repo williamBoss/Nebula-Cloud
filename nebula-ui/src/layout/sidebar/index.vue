@@ -29,18 +29,21 @@
         :collapse="sidebarCollapse"
         :collapse-transition="false"
       >
-        <SubMenu :menu-list="menu!.children" />
+        <SubMenu :menu-list="menus!.children" />
       </el-menu>
     </el-scrollbar>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, defineComponent, inject, ref, watch } from 'vue'
+import { computed, defineComponent, inject, ref } from 'vue'
 import SubMenu from '@/layout/sidebar/subMenu/index.vue'
 import { staticRouter } from '@/router/modules/staticRouter'
 import { HOME_ROUTER_NAME } from '@/config/config.js'
 import { useRoute } from 'vue-router'
+import { userStore } from '@/store/modules/user.ts'
+import { first } from 'lodash'
+import { transformRouter } from '@/router'
 
 defineComponent({
   name: 'SidebarMenu'
@@ -49,25 +52,21 @@ defineComponent({
 const route = useRoute()
 // ↓注入父组件值
 const sidebarCollapse = ref(inject('sidebarCollapse'))
+const title = ref(import.meta.env.VITE_APP_TITLE)
+const headerLogo = ref(import.meta.env.VITE_APP_HEADER_LOGO)
+const menus = computed(() => {
+  let router = staticRouter.find((e) => e.name === 'home')
+  const modules = import.meta.glob('../views/**/**.vue')
+  const menus = userStore().menuTree.map((e) => {
+    return transformRouter(e, modules)
+  })
+  router!.children = [first(router!.children), ...menus]
+  return router
+})
 const defaultActiveMenu = computed(() => {
   const name = route.name
   return name || HOME_ROUTER_NAME
 })
-
-const menu = ref(staticRouter.find((e) => e.name === 'home'))
-const title = ref(import.meta.env.VITE_APP_TITLE)
-const headerLogo = ref(import.meta.env.VITE_APP_HEADER_LOGO)
-
-watch(
-  () => staticRouter,
-  (newVal) => {
-    menu.value = newVal.find((e) => e.name === 'home')
-  },
-  {
-    immediate: true,
-    deep: true
-  }
-)
 </script>
 
 <style scoped>

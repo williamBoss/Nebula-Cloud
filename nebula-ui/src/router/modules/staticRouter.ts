@@ -21,7 +21,20 @@ export const staticRouter = [
     component: () => import('@/layout/index.vue'),
     redirect: HOME_URL,
     meta: { requiresAuth: true },
-    children: []
+    children: [
+      {
+        path: '/home/index',
+        name: 'homePage',
+        component: () => import('@/views/home/index.vue'),
+        meta: {
+          requiresAuth: true,
+          title: '首页',
+          icon: 'HomeFilled',
+          iconType: 'el',
+          hidden: false
+        }
+      }
+    ]
   }
 ]
 

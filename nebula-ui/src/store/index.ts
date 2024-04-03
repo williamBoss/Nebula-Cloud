@@ -16,10 +16,6 @@ export const globalStore = defineStore(
       count: 0,
       // token
       token: '',
-      // userInfo
-      userInfo: {},
-      // 菜单
-      menus: [],
       // element组件大小
       assemblySize: 'default',
       // language
@@ -61,28 +57,10 @@ export const globalStore = defineStore(
         UserService.user
           .getInfo()
           .then((data) => {
-            const _userStore = userStore()
-            const { menus, role, user, permissions }: any = data
-            // 验证返回的roles是否是一个非空数组
-            if (role) {
-              _userStore.setRoleNames([role.roleName])
-              _userStore.setPermissions(permissions)
-            } else {
-              _userStore.setRoleNames(['ROLE_DEFAULT'])
-            }
-            if (user.nickName !== null) {
-              _userStore.setName(user.nickName)
-            }
-            if (user.avatar !== null) {
-              _userStore.setAvatar(user.avatar)
-            }
-            state.userInfo = user
-            state.menus = menus
-            resolve(menus)
+            userStore().setUserLoginInfo(data)
+            resolve('')
           })
-          .catch((error) => {
-            reject(error)
-          })
+          .catch((error) => reject(error))
       })
     }
 
@@ -92,11 +70,9 @@ export const globalStore = defineStore(
         LoginService.auth
           .logout()
           .then((res) => {
-            const user = userStore()
             state.token = ''
-            state.userInfo = {}
-            user.setRoleNames([])
-            user.setPermissions([])
+            const user = userStore()
+            user.$state = user.defaultState()
             resolve(res)
           })
           .catch((error) => {
