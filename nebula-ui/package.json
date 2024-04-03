@@ -21,6 +21,7 @@
     "open-props": "^1.6.18",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
+    "radash": "^12.1.0",
     "randomcolor": "^0.6.2",
     "vue": "^3.4.14",
     "vue-router": "^4.2.5"

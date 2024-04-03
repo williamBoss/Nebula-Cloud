@@ -5,8 +5,6 @@ import { LoginService, UserService } from '@api/sys-api.ts'
 import piniaPersistConfig from '@/config/persist.ts'
 import { reactive, toRefs } from 'vue'
 import { userStore } from '@/store/modules/user.ts'
-import { authStore } from '@/store/modules/auth.ts'
-import { transformMenuItem } from '@/utils/util.ts'
 
 const pinia = createPinia()
 pinia.use(pinaPluginPersistence)
@@ -20,6 +18,8 @@ export const globalStore = defineStore(
       token: '',
       // userInfo
       userInfo: {},
+      // 菜单
+      menus: [],
       // element组件大小
       assemblySize: 'default',
       // language
@@ -77,16 +77,15 @@ export const globalStore = defineStore(
               _userStore.setAvatar(user.avatar)
             }
             state.userInfo = user
-            const auth = authStore()
-            const routers = menus.map((item: any) => transformMenuItem(item))
-            auth.setAuthMenuList(routers)
-            resolve(data)
+            state.menus = menus
+            resolve(menus)
           })
           .catch((error) => {
             reject(error)
           })
       })
     }
+
     // 退出系统
     const logOut = () => {
       return new Promise((resolve, reject) => {

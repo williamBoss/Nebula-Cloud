@@ -36,12 +36,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineComponent, inject, ref } from 'vue'
+import { computed, defineComponent, inject, ref, watch } from 'vue'
 import SubMenu from '@/layout/sidebar/subMenu/index.vue'
 import { staticRouter } from '@/router/modules/staticRouter'
 import { HOME_ROUTER_NAME } from '@/config/config.js'
 import { useRoute } from 'vue-router'
-import { authStore } from '@/store/modules/auth.ts'
 
 defineComponent({
   name: 'SidebarMenu'
@@ -55,14 +54,20 @@ const defaultActiveMenu = computed(() => {
   return name || HOME_ROUTER_NAME
 })
 
+const menu = ref(staticRouter.find((e) => e.name === 'home'))
 const title = ref(import.meta.env.VITE_APP_TITLE)
 const headerLogo = ref(import.meta.env.VITE_APP_HEADER_LOGO)
-const auth = authStore()
-const menu = computed(() => {
-  const router = staticRouter.find((e) => e.name === 'home')
-  router.children = auth.showMenuListGet()
-  return router
-})
+
+watch(
+  () => staticRouter,
+  (newVal) => {
+    menu.value = newVal.find((e) => e.name === 'home')
+  },
+  {
+    immediate: true,
+    deep: true
+  }
+)
 </script>
 
 <style scoped>
