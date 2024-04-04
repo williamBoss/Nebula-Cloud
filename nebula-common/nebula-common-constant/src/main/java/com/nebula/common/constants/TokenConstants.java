@@ -23,12 +23,18 @@ public class TokenConstants {
 	public final static String SECRET = "B1138FD85F144210BE849354A49CBFD6";
 
 	/**
-	 * 权限缓存前缀
-	 */
-	public final static String ROLE_KEY = SecurityConstants.AUTHORIZATION_HEADER + ":role:list:";
-
-	/**
 	 * 用户信息缓存前缀
 	 */
 	public final static String USER_INFO_KEY = SecurityConstants.AUTHORIZATION_HEADER + ":user:info:";
+
+	/**
+	 * 角色信息缓存前缀
+	 */
+	public final static String ROLE_KEY = SecurityConstants.AUTHORIZATION_HEADER + ":role:info:";
+
+	/**
+	 * 权限缓存前缀
+	 */
+	public final static String PERMISSIONS_KEY = SecurityConstants.AUTHORIZATION_HEADER + ":permission:list:";
+
 }

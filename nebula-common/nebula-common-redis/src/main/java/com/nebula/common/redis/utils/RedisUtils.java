@@ -2,6 +2,7 @@ package com.nebula.common.redis.utils;
 
 import com.nebula.common.json.utils.JacksonUtil;
 import org.redisson.api.RKeys;
+import org.redisson.api.RList;
 import org.redisson.api.RSet;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -109,6 +111,41 @@ public class RedisUtils {
 	}
 
 	/**
+	 * 插入缓存List类型
+	 *
+	 * @param key   键
+	 * @param value 值
+	 */
+	public void setList(String key, List<?> value) {
+		setList(key, value, DEFAULT_EXPIRE);
+	}
+
+	/**
+	 * 插入缓存List类型
+	 *
+	 * @param key    键
+	 * @param value  值
+	 * @param expire 过期时间
+	 */
+	public void setList(String key, List<?> value, long expire) {
+		setList(key, value, expire, ChronoUnit.SECONDS);
+	}
+
+	/**
+	 * 插入缓存List类型
+	 *
+	 * @param key      键
+	 * @param value    值
+	 * @param expire   过期时间
+	 * @param timeUnit 过期时间颗粒度（单位）
+	 */
+	public void setList(String key, List<?> value, long expire, TemporalUnit timeUnit) {
+		RList<Object> list = redissonClient.getList(key);
+		list.addAll(value);
+		list.expire(Duration.of(expire, timeUnit));
+	}
+
+	/**
 	 * 设置有效时间
 	 *
 	 * @param key     Redis键
@@ -175,6 +212,17 @@ public class RedisUtils {
 	public Set<?> getSet(String key) {
 		RSet<Object> set = redissonClient.getSet(key);
 		return set.readAll();
+	}
+
+	/**
+	 * 获取List集合
+	 *
+	 * @param key
+	 * @return
+	 */
+	public <T> List<T> getList(String key) {
+		RList<T> list = redissonClient.getList(key);
+		return list.readAll();
 	}
 
 	/**

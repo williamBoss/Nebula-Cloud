@@ -27,12 +27,6 @@
 
     <dependency>
       <groupId>com.nebula</groupId>
-      <artifactId>nebula-common-redis</artifactId>
-      <version>2024.0.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.nebula</groupId>
       <artifactId>nebula-common-log</artifactId>
       <version>2024.0.0</version>
     </dependency>

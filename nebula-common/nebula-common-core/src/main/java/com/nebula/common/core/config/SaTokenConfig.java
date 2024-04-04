@@ -1,10 +1,13 @@
 package com.nebula.common.core.config;
 
+import cn.dev33.satoken.interceptor.SaInterceptor;
 import com.nebula.common.constants.Constants;
 import com.nebula.common.constants.TokenConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * sa-token配置
@@ -12,7 +15,7 @@ import org.springframework.context.annotation.Primary;
  * @author KING
  */
 @Configuration
-public class SaTokenConfig {
+public class SaTokenConfig implements WebMvcConfigurer {
 
 	@Bean
 	@Primary
@@ -27,5 +30,11 @@ public class SaTokenConfig {
 		config.setIsReadBody(false);
 		config.setIsReadCookie(false);
 		return config;
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		// 注册 Sa-Token 拦截器，打开注解式鉴权功能
+		registry.addInterceptor(new SaInterceptor()).addPathPatterns("/**");
 	}
 }

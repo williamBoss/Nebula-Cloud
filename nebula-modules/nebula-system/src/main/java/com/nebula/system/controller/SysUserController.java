@@ -133,13 +133,14 @@ public class SysUserController {
 		// 菜单权限信息
 		List<SysMenuVO> menus = sysMenuService.selectMenuListByRoleId(sysUserVO.getRoleId());
 		List<String> perms = menus.stream().map(SysMenuVO::getPerms).filter(StringUtils::isNotBlank).toList();
-		redisUtils.set(TokenConstants.ROLE_KEY + StpUtil.getTokenValue(), perms);
+		redisUtils.setList(TokenConstants.PERMISSIONS_KEY + StpUtil.getTokenValue(), perms);
 		// 只获取路由
 		List<SysMenuVO> routers =
 			menus.stream().filter(m -> m.getMenuType().equals("M") || m.getMenuType().equals("C")).toList();
 		loginUserMap.put("menus", sysMenuService.buildMenuTree(routers));
 		loginUserMap.put("permissions", perms);
 		// 角色信息
+		redisUtils.set(TokenConstants.ROLE_KEY + StpUtil.getTokenValue(), sysUserVO.getRole().getRoleKey());
 		loginUserMap.put("role", sysUserVO.getRole());
 		return loginUserMap;
 	}
@@ -204,6 +205,7 @@ public class SysUserController {
 	/**
 	 * 状态修改
 	 */
+	@SaCheckPermission(value = "sys:user:status:update", orRole = "superadmin")
 	@OperLog(title = "用户管理-修改状态", businessType = BusinessType.UPDATE)
 	@PutMapping("/changeStatus")
 	public void changeStatus(@RequestBody SysUserVO user) {

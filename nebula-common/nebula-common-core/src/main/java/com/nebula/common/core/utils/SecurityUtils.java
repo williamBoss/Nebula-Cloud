@@ -34,8 +34,8 @@ public class SecurityUtils {
 	 *
 	 * @return
 	 */
-	public static String getRoleId() {
-		return Objects.requireNonNull(ServletUtils.getRequest()).getHeader(SecurityConstants.ROLE_ID);
+	public static String getRoleKey() {
+		return Objects.requireNonNull(ServletUtils.getRequest()).getHeader(SecurityConstants.ROLE_KEY);
 	}
 
 	/**

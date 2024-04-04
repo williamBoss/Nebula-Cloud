@@ -58,9 +58,7 @@ public class UserInfoFilter implements GlobalFilter, Ordered {
 		if (isWhiteUrl) {
 			return chain.filter(exchange);
 		}
-		String tokenKey = """
-			%s%s""".formatted(TokenConstants.USER_INFO_KEY, StpUtil.getTokenValue());
-		String userStr = redisUtils.get(tokenKey);
+		String userStr = redisUtils.get(TokenConstants.USER_INFO_KEY + StpUtil.getTokenValue());
 		Map<String, Object> parseObject = JacksonUtil.parseObject(userStr);
 		String userid = parseObject.get("userId").toString();
 		String username = parseObject.get("userName").toString();
@@ -68,11 +66,15 @@ public class UserInfoFilter implements GlobalFilter, Ordered {
 			return setUnauthorizedResponse(exchange, "令牌验证失败");
 		}
 		redisUtils.expire(TokenConstants.USER_INFO_KEY, Constants.TOKEN_EXPIRE);
+		String roleKey = redisUtils.get(TokenConstants.ROLE_KEY + StpUtil.getTokenValue());
+		redisUtils.expire(TokenConstants.ROLE_KEY, Constants.TOKEN_EXPIRE);
+		redisUtils.expire(TokenConstants.PERMISSIONS_KEY, Constants.TOKEN_EXPIRE);
 		// 设置用户信息到请求
 		ServerHttpRequest mutableReq = exchange.getRequest()
 			.mutate()
 			.header(SecurityConstants.USER_ID, userid)
 			.header(SecurityConstants.USERNAME, username)
+			.header(SecurityConstants.ROLE_KEY, roleKey)
 			.header(TokenConstants.AUTHENTICATION, StpUtil.getTokenValueNotCut())
 			.build();
 		return chain.filter(exchange.mutate().request(mutableReq).build());

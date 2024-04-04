@@ -85,6 +85,7 @@ public class LoginController {
 		StpUtil.logout();
 		redisUtils.delete(TokenConstants.USER_INFO_KEY + StpUtil.getTokenValue());
 		redisUtils.delete(TokenConstants.ROLE_KEY + StpUtil.getTokenValue());
+		redisUtils.delete(TokenConstants.PERMISSIONS_KEY + StpUtil.getTokenValue());
 		// 记录用户退出日志
 		LogininforEvent event = new LogininforEvent(this);
 		logClient.loginLog(event);
