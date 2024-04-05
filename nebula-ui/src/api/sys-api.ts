@@ -23,8 +23,7 @@ export class MenuService {
   private static BASE_MENU_URL = `${system}/sysMenu`
 
   static menu = {
-    getList: (searchParam: string) =>
-      Request.get<Pageable<Menu>>(`${this.BASE_MENU_URL}/list`, { searchKey: searchParam }),
+    getList: (params: {}) => Request.get<Pageable<Menu>>(`${this.BASE_MENU_URL}/list`, params),
 
     getAllList: () => Request.get<Menu[]>(`${this.BASE_MENU_URL}/all/list`),
 
@@ -45,8 +44,7 @@ export class ConfigService {
   private static BASE_CONFIG_URL = `${system}/sysConfig`
 
   static config = {
-    getList: (searchParam: string) =>
-      Request.get<Pageable<Config>>(`${this.BASE_CONFIG_URL}/list`, { searchKey: searchParam }),
+    getList: (params: {}) => Request.get<Pageable<Config>>(`${this.BASE_CONFIG_URL}/list`, params),
 
     getInfoById: (id: string | number) => Request.get<Config>(`${this.BASE_CONFIG_URL}/${id}`),
 
@@ -96,8 +94,8 @@ export class RoleService {
 
     del: (id: string | number) => Request.delete(`${this.BASE_ROLE_URL}/${id}`),
 
-    getUserList: (roleKey: string, searchParam: string) =>
-      Request.get<Pageable<User>>(`${this.BASE_ROLE_URL}/user/list/${roleKey}`, { searchKey: searchParam }),
+    getUserList: (roleKey: string, params: {}) =>
+      Request.get<Pageable<User>>(`${this.BASE_ROLE_URL}/user/list/${roleKey}`, params),
 
     addUserRole: (roleKey: string | number, userId: string | number) =>
       Request.post(`${this.BASE_ROLE_URL}/addUserRole/${roleKey}/${userId}`),

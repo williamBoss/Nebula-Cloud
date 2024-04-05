@@ -41,9 +41,21 @@ const configFormRef = ref<InstanceType<typeof ConfigInfo> | null>()
 const title = ref<string>('')
 
 const getConfigList = () => {
-  ConfigService.config.getList(searchParam.value).then((data: Pageable<Config>) => {
-    pageable.value = data
-  })
+  const { records, ...pageParam } = pageable.value
+  ConfigService.config
+    .getList(Object.assign({}, { searchKey: searchParam.value }, pageParam))
+    .then((data: Pageable<Config>) => {
+      pageable.value = data
+    })
+}
+const handleSizeChange = (val: string) => {
+  pageable.value.pageNumber = '1'
+  pageable.value.pageSize = val
+  getConfigList()
+}
+const handleCurrentChange = (val: string) => {
+  pageable.value.pageNumber = val
+  getConfigList()
 }
 const resetSearch = () => {
   searchParam.value = ''
@@ -113,6 +125,8 @@ onMounted(() => {
             total: parseInt(pageable.totalRow)
           }"
           @query-list="getConfigList"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
           @update="handleUpdate"
           @delete="handleDelete"
         >

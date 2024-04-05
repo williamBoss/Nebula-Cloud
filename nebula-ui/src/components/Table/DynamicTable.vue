@@ -52,10 +52,10 @@ const pagination = computed(() => {
 const handleQuery = () => {
   emits('query-list', props.initParam)
 }
-const handleSizeChange = (size: number) => {
+const handleSizeChange = (size: string) => {
   emits('size-change', size)
 }
-const handleCurrentChange = (currentPage: number) => {
+const handleCurrentChange = (currentPage: string) => {
   emits('current-change', currentPage)
 }
 const handleUpdate = (row: any) => {

@@ -1,6 +1,9 @@
 package com.nebula.system.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.mybatisflex.core.paginate.Page;
+import com.nebula.common.log.annotation.OperLog;
+import com.nebula.common.log.enums.BusinessType;
 import com.nebula.datasource.page.PageQuery;
 import com.nebula.system.domain.SysMenu;
 import com.nebula.system.domain.vo.SysMenuVO;
@@ -55,6 +58,7 @@ public class SysMenuController {
 	 * @return 所有数据
 	 */
 	@Operation(summary = "查询所有菜单", description = "查询所有菜单")
+	@SaCheckPermission(value = "sys:menu:list")
 	@GetMapping("/all/list")
 	public List<SysMenuVO> list() {
 		List<SysMenuVO> menus = converter.convert(sysMenuService.list(), SysMenuVO.class);
@@ -84,6 +88,8 @@ public class SysMenuController {
 	 * @return {@code true} 添加成功，{@code false} 添加失败
 	 */
 	@Operation(summary = "添加 菜单", description = "添加 菜单")
+	@SaCheckPermission(value = "sys:menu:save")
+	@OperLog(title = "菜单管理-添加菜单", businessType = BusinessType.INSERT)
 	@PostMapping
 	public boolean save(@RequestBody SysMenuVO sysMenu) {
 		return sysMenuService.save(converter.convert(sysMenu, SysMenu.class));
@@ -96,6 +102,8 @@ public class SysMenuController {
 	 * @return {@code true} 更新成功，{@code false} 更新失败
 	 */
 	@Operation(summary = "根据主键更新菜单", description = "根据主键更新菜单")
+	@SaCheckPermission(value = "sys:menu:update")
+	@OperLog(title = "菜单管理", businessType = BusinessType.UPDATE)
 	@PutMapping
 	public boolean update(@RequestBody SysMenuVO sysMenu) {
 		return sysMenuService.updateById(converter.convert(sysMenu, SysMenu.class));
@@ -109,6 +117,8 @@ public class SysMenuController {
 	 */
 	@Parameter(name = "id", description = "主键", in = ParameterIn.PATH, required = true)
 	@Operation(summary = "根据主键删除菜单", description = "根据主键删除菜单")
+	@SaCheckPermission(value = "sys:menu:remove")
+	@OperLog(title = "菜单管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{id}")
 	public boolean remove(@PathVariable Integer id) {
 		return sysMenuService.removeById(id);

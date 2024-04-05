@@ -52,7 +52,7 @@ public class SysUserRoleServiceImpl extends ServiceImpl<SysUserRoleMapper, SysUs
                 .or(SYS_USER.NICK_NAME.like(searchKey))
                 .or(SYS_USER.PHONENUMBER.like(searchKey)))
             .orderBy(SYS_USER_ROLE.USER_ID.asc());
-        return sysUserRoleMapper.paginateAs(pageQuery.getPageNum(), pageQuery.getPageSize(), queryWrapper,
+        return sysUserRoleMapper.paginateAs(pageQuery.getPageNumber(), pageQuery.getPageSize(), queryWrapper,
             SysUserVO.class);
     }
 }

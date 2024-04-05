@@ -37,7 +37,7 @@ public class SysOperLogServiceImpl extends ServiceImpl<SysOperLogMapper, SysOper
             .and(SYS_OPER_LOG.OPER_TIME.between(params.get("beginTime"), params.get("endTime")))
             .and(SYS_OPER_LOG.BUSINESS_TYPE.eq(operLog.getBusinessType()))
             .orderBy(SYS_OPER_LOG.OPER_ID, false);
-        return sysOperLogMapper.paginateAs(pageQuery.getPageNum(), pageQuery.getPageSize(), queryWrapper,
+        return sysOperLogMapper.paginateAs(pageQuery.getPageNumber(), pageQuery.getPageSize(), queryWrapper,
             SysOperLogVO.class);
     }
 }

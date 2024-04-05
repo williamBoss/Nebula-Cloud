@@ -36,7 +36,7 @@ public class SysLogininforServiceImpl extends ServiceImpl<SysLogininforMapper, S
             .and(SYS_LOGININFOR.USER_NAME.like(logininfor.getUserName()))
             .and(SYS_LOGININFOR.LOGIN_TIME.between(params.get("beginTime"), params.get("endTime")))
             .orderBy(SYS_LOGININFOR.LOGIN_TIME, false);
-        return sysLogininforMapper.paginateAs(pageQuery.getPageNum(), pageQuery.getPageSize(), queryWrapper,
+        return sysLogininforMapper.paginateAs(pageQuery.getPageNumber(), pageQuery.getPageSize(), queryWrapper,
             SysLogininforVO.class);
     }
 }

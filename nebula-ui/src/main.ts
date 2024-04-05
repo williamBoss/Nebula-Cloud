@@ -6,22 +6,32 @@ import router, { buildRoutes } from '@/router/index.ts'
 import SvgIcon from '~virtual/svg-component'
 
 const app = createApp(App)
-app.use(pinia).use(router)
-app.component(SvgIcon.name, SvgIcon).mount('#app')
+app.use(pinia)
+initializeApp().catch((err) => {
+  console.log('初始化应用失败', err)
+})
 
 /**
  * 初始化应用
  */
-const initializeApp = () => {
-  //获取登录用户信息
-  if (globalStore().token) {
-    globalStore()
-      .getUserInfo()
-      .then(() => {
-        //构建系统的路由
-        buildRoutes()
-      })
-  }
+async function initializeApp() {
+  await initializeUserInfoAndRouter()
+  //初始化路由
+  app.use(router)
+  //初始化全局组件
+  app.component(SvgIcon.name, SvgIcon)
+  //挂载
+  app.mount('#app')
 }
 
-initializeApp()
+/**
+ * 初始化用户信息和路由
+ */
+async function initializeUserInfoAndRouter() {
+  //获取登录用户信息
+  if (globalStore().token) {
+    await globalStore().getUserInfo()
+    buildRoutes()
+  }
+  return Promise.resolve()
+}

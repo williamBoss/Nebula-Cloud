@@ -50,7 +50,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
 	@Override
 	public Page<SysUserVO> selectUserPageList(SysUserVO user, PageQuery pageQuery) {
-		return sysUserMapper.paginateAs(pageQuery.getPageNum(), pageQuery.getPageSize(),
+		return sysUserMapper.paginateAs(pageQuery.getPageNumber(), pageQuery.getPageSize(),
 			buildQueryWrapper(user, user.getParams()), SysUserVO.class);
 	}
 

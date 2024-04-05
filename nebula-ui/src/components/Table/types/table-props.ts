@@ -144,8 +144,8 @@ export interface TableExtProps extends TableProps {
 
 export interface Emits {
   (e: 'selection-change', value: any[]): void
-  (e: 'size-change', size: number): void
-  (e: 'current-change', currentPage: number): void
+  (e: 'size-change', size: string): void
+  (e: 'current-change', currentPage: string): void
   (e: 'query-list', initParam: any): void
   (e: 'update', row: any): void
   (e: 'delete', row: any): void

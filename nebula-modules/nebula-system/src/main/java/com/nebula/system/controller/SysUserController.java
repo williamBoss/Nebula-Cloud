@@ -59,6 +59,7 @@ public class SysUserController {
 		this.redisUtils = redisUtils;
 	}
 
+	@SaCheckPermission(value = "sys:user:list")
 	@GetMapping("/list")
 	public Page<SysUserVO> list(SysUserVO user, PageQuery pageQuery) {
 		return sysUserService.selectUserPageList(user, pageQuery);
@@ -148,7 +149,7 @@ public class SysUserController {
 	/**
 	 * 新增用户
 	 */
-	@SaCheckPermission(value = "sys:user:save", orRole = "admin")
+	@SaCheckPermission(value = "sys:user:save")
 	@OperLog(title = "用户管理-新增用户", businessType = BusinessType.INSERT, excludeParamNames = {"password"})
 	@PostMapping
 	public void add(@RequestBody SysUserVO user) {
@@ -159,6 +160,8 @@ public class SysUserController {
 	/**
 	 * 修改用户
 	 */
+	@SaCheckPermission(value = "sys:user:update")
+	@OperLog(title = "用户管理-修改用户", businessType = BusinessType.UPDATE, excludeParamNames = {"password"})
 	@PutMapping
 	public void edit(@RequestBody SysUserVO user) {
 		checkUserInfo(user);
@@ -168,7 +171,7 @@ public class SysUserController {
 	/**
 	 * 校验用户信息
 	 *
-	 * @param user
+	 * @param user 用户信息
 	 */
 	private void checkUserInfo(SysUserVO user) {
 		if (sysUserService.checkUserNameUnique(user)) {
@@ -185,6 +188,8 @@ public class SysUserController {
 	 *
 	 * @param userIds 角色ID串
 	 */
+	@SaCheckPermission(value = "sys:user:remove")
+	@OperLog(title = "用户管理-删除用户", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{userIds}")
 	public void remove(@PathVariable Long[] userIds) {
 		List<Long> ids = Arrays.asList(userIds);
@@ -197,6 +202,8 @@ public class SysUserController {
 	/**
 	 * 重置密码
 	 */
+	@SaCheckPermission(value = "sys:user:password:update")
+	@OperLog(title = "用户管理-重置密码", businessType = BusinessType.UPDATE, excludeParamNames = {"password"})
 	@PutMapping("/resetPwd")
 	public void resetPwd(@RequestBody SysUserVO user) {
 		sysUserService.resetUserPwd(user);
@@ -205,8 +212,8 @@ public class SysUserController {
 	/**
 	 * 状态修改
 	 */
-	@SaCheckPermission(value = "sys:user:status:update", orRole = "superadmin")
-	@OperLog(title = "用户管理-修改状态", businessType = BusinessType.UPDATE)
+	@SaCheckPermission(value = "sys:user:status:update")
+	@OperLog(title = "用户管理-状态修改", businessType = BusinessType.UPDATE)
 	@PutMapping("/changeStatus")
 	public void changeStatus(@RequestBody SysUserVO user) {
 		sysUserService.updateStatus(user);

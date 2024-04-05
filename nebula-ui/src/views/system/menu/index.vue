@@ -48,9 +48,21 @@ const menuFormRef = ref<InstanceType<typeof MenuInfo> | null>()
 const title = ref<string>('')
 
 const getMenuList = () => {
-  MenuService.menu.getList(searchParam.value).then((data: Pageable<Menu>) => {
-    pageable.value = data
-  })
+  const { records, ...pageParam } = pageable.value
+  MenuService.menu
+    .getList(Object.assign({}, { searchKey: searchParam.value }, pageParam))
+    .then((data: Pageable<Menu>) => {
+      pageable.value = data
+    })
+}
+const handleSizeChange = (val: string) => {
+  pageable.value.pageNumber = '1'
+  pageable.value.pageSize = val
+  getMenuList()
+}
+const handleCurrentChange = (val: string) => {
+  pageable.value.pageNumber = val
+  getMenuList()
 }
 const resetSearch = () => {
   searchParam.value = ''
@@ -95,6 +107,8 @@ onMounted(() => {
           total: parseInt(pageable.totalRow)
         }"
         @query-list="getMenuList"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
         @update="handleUpdate"
         @delete="handleDelete"
       >

@@ -37,7 +37,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
 			.from(SYS_MENU)
 			.where(SYS_MENU.MENU_NAME.like(searchKey))
 			.or(SYS_MENU.PATH.like(searchKey));
-		return sysMenuMapper.paginateAs(page.getPageNum(), page.getPageSize(), queryWrapper, SysMenuVO.class);
+		return sysMenuMapper.paginateAs(page.getPageNumber(), page.getPageSize(), queryWrapper, SysMenuVO.class);
 	}
 
 	@Override

@@ -46,9 +46,21 @@ const transform = (row: User) => {
   return sex ? sex.dictLabel : ''
 }
 const getUserList = () => {
-  RoleService.role.getUserList(roleKey.value, searchParam.value).then((data: Pageable<User>) => {
-    pageable.value = data
-  })
+  const { records, ...pageParam } = pageable.value
+  RoleService.role
+    .getUserList(roleKey.value, Object.assign({}, { searchKey: searchParam.value }, pageParam))
+    .then((data: Pageable<User>) => {
+      pageable.value = data
+    })
+}
+const handleSizeChange = (val: string) => {
+  pageable.value.pageNumber = '1'
+  pageable.value.pageSize = val
+  getUserList()
+}
+const handleCurrentChange = (val: string) => {
+  pageable.value.pageNumber = val
+  getUserList()
 }
 const resetSearch = () => {
   searchParam.value = ''
@@ -89,6 +101,8 @@ onMounted(() => {
       total: parseInt(pageable.totalRow)
     }"
     @query-list="getUserList"
+    @size-change="handleSizeChange"
+    @current-change="handleCurrentChange"
   >
     <template #tableHeader>
       <div>

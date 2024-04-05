@@ -120,7 +120,6 @@ const login = (formEl: FormInstance) => {
             buildRoutes()
           })
           .then(() => {
-            console.log(router.getRoutes())
             router.replace(HOME_URL)
             elNotification({
               title: getTimeState(),

@@ -18,7 +18,7 @@ public class PageQuery implements Serializable {
     /**
      * 当前页数
      */
-    private Integer pageNum = 1;
+    private Integer pageNumber = 1;
 
     /**
      * 分页大小

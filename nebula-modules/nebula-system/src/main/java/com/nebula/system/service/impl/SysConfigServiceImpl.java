@@ -33,7 +33,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
             .from(SYS_CONFIG)
             .where(SYS_CONFIG.CONFIG_NAME.like(searchKey))
             .or(SYS_CONFIG.CONFIG_KEY.like(searchKey));
-        return sysConfigMapper.paginateAs(page.getPageNum(), page.getPageSize(), queryWrapper, SysConfigVO.class);
+        return sysConfigMapper.paginateAs(page.getPageNumber(), page.getPageSize(), queryWrapper, SysConfigVO.class);
     }
 
     @Override
