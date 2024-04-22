@@ -11,11 +11,11 @@
   "dependencies": {
     "antd-mobile": "^5.35.0",
     "axios": "^1.6.8",
+    "dayjs": "^1.11.10",
     "lodash": "^4.17.21",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "radash": "^12.1.0",
-    "unocss": "^0.59.0",
     "vant": "^4.8.10",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
@@ -37,6 +37,7 @@
     "postcss-preset-env": "^9.3.0",
     "prettier": "^3.2.5",
     "typescript": "^5.4.4",
+    "unocss": "^0.59.4",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-icons": "^0.18.2",
     "unplugin-svg-component": "^0.8.0",

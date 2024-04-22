@@ -7,6 +7,7 @@ import VitePluginVueDevTools from 'vite-plugin-vue-devtools'
 import unpluginSvgComponent from 'unplugin-svg-component/vite'
 import icons from 'unplugin-icons/vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
+import unoCSS from 'unocss/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
@@ -28,6 +29,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     plugins: [
       vue(),
       VitePluginVueDevTools(),
+      unoCSS(),
       icons({
         autoInstall: true,
         compiler: 'vue3'

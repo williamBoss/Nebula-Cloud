@@ -52,27 +52,87 @@
             plain
             type="primary"
             size="small"
+            @click="onClock"
           >
             打卡
           </van-button>
         </van-step>
-        <van-step>
-          <h3>药品名称</h3>
-          <p>2016-07-12 12:40</p>
+        <van-step v-for="clock in clocks">
+          <p class="color-black">{{ clock.drugName }}</p>
+          <p>{{ clock.duration }}</p>
         </van-step>
       </van-steps>
     </van-cell>
   </van-cell-group>
+
+  <van-action-sheet
+    v-model:show="show"
+    title="打卡"
+    :close-on-click-overlay="false"
+  >
+    <div class="flx pl-16px pr-16px min-h-200px">
+      <van-form
+        class="flx w-full"
+        style="flex-flow: row wrap"
+        @submit="onSubmit"
+      >
+        <van-cell-group inset>
+          <van-field
+            v-model="drugName"
+            name="drugName"
+            label="药品名称"
+            placeholder="请填写药品名称"
+            :rules="[{ required: true, message: '请填写药品名称' }]"
+          />
+        </van-cell-group>
+        <div
+          class="flx w-full"
+          style="align-self: flex-end"
+        >
+          <van-button
+            round
+            block
+            type="danger"
+            @click="show = false"
+          >
+            取消
+          </van-button>
+          <span class="ml-4"></span>
+          <van-button
+            round
+            block
+            type="primary"
+            native-type="submit"
+          >
+            提交
+          </van-button>
+        </div>
+      </van-form>
+    </div>
+  </van-action-sheet>
 </template>
 
 <script setup lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import punchClock from '@/assets/punchClock.svg'
 import refresh from '@/assets/refresh.svg'
+import dayjs from 'dayjs'
 
 defineComponent({
   name: 'punchClock'
 })
+
+const show = ref<boolean>(false)
+const drugName = ref<string>('')
+const clocks = ref<any[]>([{ drugName: '阿莫西林', duration: dayjs().format('YYYY-MM-DD hh:mm') }])
+
+const onClock = () => {
+  show.value = true
+}
+const onSubmit = (value: any) => {
+  clocks.value.push({ drugName: value.drugName, duration: dayjs().format('YYYY-MM-DD hh:mm') })
+  show.value = false
+}
 </script>
 
 <style scoped>

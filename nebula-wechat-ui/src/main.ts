@@ -5,6 +5,7 @@ import pinia from '@/store/index.ts'
 import router from '@/router/index.ts'
 import SvgIcon from '~virtual/svg-component'
 import 'vant/lib/index.css'
+import 'virtual:uno.css'
 
 const app = createApp(App)
 app.use(pinia)
