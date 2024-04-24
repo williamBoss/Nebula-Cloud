@@ -76,7 +76,7 @@ public class WechatComponent {
 		// 获取令牌
 		newAccessToken.set(map.get("access_token").toString());
 		if (StringUtils.isNotBlank(newAccessToken.get())) {
-			redisUtils.set(Constants.WX_ACCESS_TOKEN, accessToken, (Long)map.get("expires_in"));
+			redisUtils.set(Constants.WX_ACCESS_TOKEN, newAccessToken.get(), Long.parseLong(map.get("expires_in").toString()));
 			log.info("access_token:{}", newAccessToken.get());
 		}
 		return newAccessToken.get();
