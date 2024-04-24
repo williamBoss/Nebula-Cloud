@@ -15,25 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.nebula</groupId>
-            <artifactId>nebula-common-core</artifactId>
-            <version>2024.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.nebula</groupId>
-            <artifactId>nebula-common-datasource</artifactId>
-            <version>2024.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.nebula</groupId>
-            <artifactId>nebula-common-log</artifactId>
-            <version>2024.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.nebula</groupId>
-            <artifactId>nebula-common-json</artifactId>
+            <artifactId>nebula-common-pom</artifactId>
             <version>2024.0.0</version>
         </dependency>
     </dependencies>

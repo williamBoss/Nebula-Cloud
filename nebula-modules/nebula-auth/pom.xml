@@ -20,14 +20,18 @@
   <dependencies>
     <dependency>
       <groupId>com.nebula</groupId>
-      <artifactId>nebula-common-core</artifactId>
+      <artifactId>nebula-common-pom</artifactId>
       <version>2024.0.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.nebula</groupId>
-      <artifactId>nebula-common-log</artifactId>
-      <version>2024.0.0</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>nebula-common-datasource</artifactId>
+          <groupId>com.nebula</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>nebula-common-json</artifactId>
+          <groupId>com.nebula</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!--验证码 -->

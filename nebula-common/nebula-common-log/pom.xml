@@ -24,14 +24,12 @@
       <groupId>com.nebula</groupId>
       <artifactId>nebula-common-core</artifactId>
       <version>2024.0.0</version>
-      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>com.nebula</groupId>
       <artifactId>nebula-common-json</artifactId>
       <version>2024.0.0</version>
-      <scope>provided</scope>
     </dependency>
 
     <dependency>
