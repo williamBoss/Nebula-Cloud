@@ -62,6 +62,7 @@
       />
       <van-grid-item
         icon="records"
+        to="/patient/visit"
         text="我的随访"
       />
       <van-grid-item
@@ -70,6 +71,7 @@
       />
       <van-grid-item
         icon="chat-o"
+        to="/patient/consult"
         text="在线咨询"
       />
     </van-grid>

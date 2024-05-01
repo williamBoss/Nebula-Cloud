@@ -15,8 +15,8 @@ router.beforeEach((to, _from, next) => {
   const fullPath = to.fullPath
   if (whiteList.indexOf(String(to.path)) !== -1) {
     // 在免登录白名单，直接进入
-    return next()
   }
+  return next()
   const { token } = global
   // 判断token是否存在
   if (!token) {

@@ -16,12 +16,6 @@ export const staticRouter: Array<RouteRecordRaw> = [
     meta: { requiresAuth: false }
   },
   {
-    path: '/visit',
-    component: () => import('@/views/visit/index.vue'),
-    // 任何人都可访问的页面
-    meta: { requiresAuth: true }
-  },
-  {
     path: '/patient',
     component: () => import('@/views/patient/patientRouter.vue'),
     // 任何人都可访问的页面
@@ -42,6 +36,48 @@ export const staticRouter: Array<RouteRecordRaw> = [
         path: 'punchClock',
         component: () => import('@/views/patient/punchClock.vue'),
         meta: { requiresAuth: true }
+      },
+      {
+        path: 'visit',
+        component: () => import('@/views/visit/index.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'consult',
+        name: 'consult',
+        component: () => import('@/views/consult/index.vue'),
+        meta: { requiresAuth: true }
+      }
+    ]
+  },
+  {
+    path: '/visit',
+    children: [
+      {
+        path: 'form',
+        name: 'visitForm',
+        component: () => import('@/views/visit/form.vue'),
+        meta: { requiresAuth: true }
+      }
+    ]
+  },
+  {
+    path: '/consult',
+    children: [
+      {
+        path: 'form',
+        name: 'consultForm',
+        component: () => import('@/views/consult/form.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'detail',
+        name: 'consultDetail',
+        component: () => import('@/views/consult/detail.vue'),
+        props: (route) => {
+          return route.query
+        },
+        meta: { requiresAuth: true }
       }
     ]
   }
@@ -52,29 +88,29 @@ export const staticRouter: Array<RouteRecordRaw> = [
  */
 export const errorRouter = [
   /*{
-          path: '/403',
-          name: '403',
-          component: () => import('@/components/ErrorMessage/403.vue'),
-          meta: {
-            title: '403页面'
-          }
-        },
-        {
-          path: '/404',
-          name: '404',
-          component: () => import('@/components/ErrorMessage/404.vue'),
-          meta: {
-            title: '404页面'
-          }
-        },
-        {
-          path: '/500',
-          name: '500',
-          component: () => import('@/components/ErrorMessage/500.vue'),
-          meta: {
-            title: '500页面'
-          }
-        }*/
+                                path: '/403',
+                                name: '403',
+                                component: () => import('@/components/ErrorMessage/403.vue'),
+                                meta: {
+                                  title: '403页面'
+                                }
+                              },
+                              {
+                                path: '/404',
+                                name: '404',
+                                component: () => import('@/components/ErrorMessage/404.vue'),
+                                meta: {
+                                  title: '404页面'
+                                }
+                              },
+                              {
+                                path: '/500',
+                                name: '500',
+                                component: () => import('@/components/ErrorMessage/500.vue'),
+                                meta: {
+                                  title: '500页面'
+                                }
+                              }*/
 ]
 
 /**
