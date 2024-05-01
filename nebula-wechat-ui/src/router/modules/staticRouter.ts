@@ -43,6 +43,12 @@ export const staticRouter: Array<RouteRecordRaw> = [
         meta: { requiresAuth: true }
       },
       {
+        path: 'educate',
+        name: 'educate',
+        component: () => import('@/views/educate/index.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
         path: 'consult',
         name: 'consult',
         component: () => import('@/views/consult/index.vue'),
@@ -57,6 +63,17 @@ export const staticRouter: Array<RouteRecordRaw> = [
         path: 'form',
         name: 'visitForm',
         component: () => import('@/views/visit/form.vue'),
+        meta: { requiresAuth: true }
+      }
+    ]
+  },
+  {
+    path: '/educate',
+    children: [
+      {
+        path: 'detail',
+        name: 'educateDetail',
+        component: () => import('@/views/educate/detail.vue'),
         meta: { requiresAuth: true }
       }
     ]

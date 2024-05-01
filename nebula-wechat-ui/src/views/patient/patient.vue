@@ -67,6 +67,7 @@
       />
       <van-grid-item
         icon="video-o"
+        to="/patient/educate"
         text="健康教育"
       />
       <van-grid-item
