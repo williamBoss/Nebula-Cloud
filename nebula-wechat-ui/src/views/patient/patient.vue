@@ -54,6 +54,7 @@
       />
       <van-grid-item
         icon="description"
+        to="/patient/drug"
         text="我的用药"
       />
       <van-grid-item
