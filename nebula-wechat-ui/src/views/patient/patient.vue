@@ -59,6 +59,7 @@
       />
       <van-grid-item
         icon="todo-list-o"
+        to="/patient/check"
         text="我的检查"
       />
       <van-grid-item
