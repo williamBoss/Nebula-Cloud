@@ -49,7 +49,7 @@ const onLoad = () => {
 
     list.value.push(...json.value)
     if (Object.keys(route.query).length !== 0) {
-      list.value.push(route.query)
+      list.value.unshift(route.query)
     }
     loading.value = false
     finished.value = true

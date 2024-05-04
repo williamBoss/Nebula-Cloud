@@ -16,7 +16,7 @@
           class="cell-bottom h-95px"
           inset
         >
-          <van-cell :to="`/visit/form?id=${item.id}&status=${item.status}`">
+          <van-cell :to="`/visit/form?id=${item.id}&key=${item.key}&status=${item.status}`">
             <template #title>
               <div class="flex flx-justify-between">
                 <div class="custom-title">{{ item.title }}</div>
@@ -45,6 +45,7 @@
 
 <script setup lang="ts">
 import { defineComponent, ref } from 'vue'
+import scaleData from '@/views/visit/scaleAnswers.json'
 
 defineComponent({
   name: 'Visit'
@@ -52,9 +53,11 @@ defineComponent({
 
 interface Visit {
   id: number
+  key: string
   title: string
   status: number
   score: number
+  answer: object
   totalScore: number
   date: string
 }
@@ -71,9 +74,7 @@ const onLoad = () => {
       refreshing.value = false
     }
 
-    list.value.push({ id: 1, title: '用药依从性', status: 0, score: 0, totalScore: 10, date: '2024-04-25' })
-    list.value.push({ id: 2, title: 'SAS', status: 1, score: 15, totalScore: 20, date: '2024-04-20' })
-    list.value.push({ id: 3, title: 'SDS', status: 0, score: 0, totalScore: 20, date: '2024-04-19' })
+    list.value.push(...scaleData)
     loading.value = false
     finished.value = true
   }, 1000)

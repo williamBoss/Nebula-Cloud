@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "key": "MedicationComplianceSurvey",
+    "title": "用药依从性",
+    "status": 1,
+    "score": 5.25,
+    "answer": {
+      "questions1": 1,
+      "questions2": 1,
+      "questions3": 0,
+      "questions4": 1,
+      "questions5": 1,
+      "questions6": 0,
+      "questions7": 1,
+      "questions8": 0.25
+    },
+    "totalScore": 8,
+    "date": "2024-04-25"
+  },
+  {
+    "id": 2,
+    "key": "SAS",
+    "title": "SAS",
+    "status": 1,
+    "score": 15,
+    "answer": {},
+    "totalScore": 20,
+    "date": "2024-04-20"
+  },
+  {
+    "id": 3,
+    "key": "SDS",
+    "title": "SDS",
+    "status": 0,
+    "score": 0,
+    "answer": {},
+    "totalScore": 20,
+    "date": "2024-04-19"
+  }
+]

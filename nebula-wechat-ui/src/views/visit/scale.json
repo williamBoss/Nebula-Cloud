@@ -1,0 +1,92 @@
+[
+  {
+    "MedicationComplianceSurvey": {
+      "questions": [
+        {
+          "id": "questions1",
+          "questionText": "您是否有时忘记服药？",
+          "options": {
+            "是": 0,
+            "否": 1
+          }
+        },
+        {
+          "id": "questions2",
+          "questionText": "在过去的２周内，是否有一天或几天您忘记服药？",
+          "options": {
+            "是": 0,
+            "否": 1
+          }
+        },
+        {
+          "id": "questions3",
+          "questionText": "治疗期间，当您觉得症状加重或出现其他症状时，您是否未告知医生而自行减少药量或停止服药？",
+          "options": {
+            "是": 0,
+            "否": 1
+          }
+        },
+        {
+          "id": "questions4",
+          "questionText": "当您外出旅行或长时间离家时，您是否有时忘记随身携带药物？",
+          "options": {
+            "是": 0,
+            "否": 1
+          }
+        },
+        {
+          "id": "questions5",
+          "questionText": "昨天您服药了吗？",
+          "options": {
+            "是": 1,
+            "否": 0
+          }
+        },
+        {
+          "id": "questions6",
+          "questionText": "当您觉得自己的疾病已经得到控制时，您是否停止过服药？",
+          "options": {
+            "是": 0,
+            "否": 1
+          }
+        },
+        {
+          "id": "questions7",
+          "questionText": "您是否觉得要坚持治疗计划有困难？",
+          "options": {
+            "是": 0,
+            "否": 1
+          }
+        },
+        {
+          "id": "questions8",
+          "questionText": "您觉得要记住按时按量服药很难吗？",
+          "options": {
+            "从不": 1,
+            "偶尔": 0.75,
+            "有时": 0.5,
+            "经常": 0.25,
+            "所有时间": 0
+          }
+        }
+      ],
+      "evaluationCriteria": {
+        "rules": {
+          "score<6": "less_than_6",
+          "6<=score&&score<8": "6-8",
+          "8<score": "8"
+        },
+        "scores": {
+          "less_than_6": "依从性差",
+          "6-8": "依从性中等",
+          "8": "依从性好"
+        },
+        "colors": {
+          "less_than_6": "#FF0000",
+          "6-8": "#FFA500",
+          "8": "#00FF00"
+        }
+      }
+    }
+  }
+]

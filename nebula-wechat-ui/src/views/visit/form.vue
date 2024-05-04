@@ -1,16 +1,58 @@
 <script setup lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, h, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import scale from '@/views/visit/scale.json'
+import scaleAnswerData from '@/views/visit/scaleAnswers.json'
 
 defineComponent({
   name: 'Form'
 })
 
 const route = useRoute()
-const { id, status } = route.query
-const answers = ref({})
+const { id, key, status } = route.query
+const scaleData = computed(() => {
+  return scale.find((item: any) => item.hasOwnProperty(key))?.[key! as string] || {}
+})
+const answers = computed(() => {
+  return (status === '1' && scaleAnswerData.find((item: any) => item.id == id)?.answer) || {}
+})
 const disabled = ref(status === '1')
 const anchors = [100, Math.round(0.4 * window.innerHeight), Math.round(0.9 * window.innerHeight)]
+
+const conclusion = computed(() => {
+  if (status === '0' || !scaleData.value?.evaluationCriteria) {
+    return ''
+  }
+
+  const score = scaleAnswerData.find((item: any) => item.id == id)?.score || 0
+  const { rules, scores, colors } = scaleData.value.evaluationCriteria
+
+  const evaluateRule = (rule: string, currentScore: number) => {
+    try {
+      const fn = new Function('score', `return ${rule.replace(/score/g, 'score')}`)
+      return fn(currentScore)
+    } catch (_) {
+      return false
+    }
+  }
+
+  const matchedRule = Object.entries(rules).find(([rule, _]) => evaluateRule(rule, score))
+  if (matchedRule) {
+    const [_, ruleValue] = matchedRule
+    const description = scores[ruleValue! as string] || ''
+    const color = colors[ruleValue! as string] || ''
+    return h(
+      'div',
+      {
+        class: `p-15px text-lg`,
+        style: { color: color }
+      },
+      [h('p', {}, `得分：${score}`), h('p', {}, `评价：${description}`)]
+    )
+  }
+
+  return ''
+})
 </script>
 
 <template>
@@ -23,23 +65,30 @@ const anchors = [100, Math.round(0.4 * window.innerHeight), Math.round(0.9 * win
       fill
       :size="20"
     >
-      <van-cell-group inset>
+      <van-cell-group
+        v-for="q in scaleData.questions"
+        inset
+      >
         <van-field
-          name="st"
-          label="单选框1"
+          :name="q.id"
+          :label="q.questionText"
           label-align="top"
         >
           <template #input>
             <van-radio-group
-              v-model="answers.st"
+              v-model="answers[q.id]"
               :disabled="disabled"
             >
               <van-space
                 direction="vertical"
                 fill
               >
-                <van-radio name="1">单选框 1</van-radio>
-                <van-radio name="2">单选框 2</van-radio>
+                <van-radio
+                  v-for="(value, key) in q.options"
+                  :name="value"
+                >
+                  {{ key }}
+                </van-radio>
               </van-space>
             </van-radio-group>
           </template>
@@ -60,15 +109,11 @@ const anchors = [100, Math.round(0.4 * window.innerHeight), Math.round(0.9 * win
       </van-button>
     </div>
     <van-floating-panel
-      v-model:height="anchors[2]"
+      v-model:height="anchors[1]"
       :anchors="anchors"
+      v-if="status === '1'"
     >
-      <div style="text-align: center; padding: 15px">
-        <p>
-          1-7题的备选答案为“是”、“否”，答“是”记0分，“否”记1分，其中第5题反向计分，第8题答案，选择从上往下的答案，分别记1分，0.75分，0.5分，0.25分，0分。量表满分8分，得分
-          < 6分为依从性差，得分6-8分为依从性中等，得分8分为依从性好。
-        </p>
-      </div>
+      <component :is="conclusion" />
     </van-floating-panel>
   </van-form>
 </template>
