@@ -3,6 +3,46 @@
     "id": 1,
     "key": "MedicationComplianceSurvey",
     "title": "用药依从性",
+    "status": 0,
+    "score": "?",
+    "answer": {},
+    "totalScore": 8,
+    "date": "2024-04-25"
+  },
+  {
+    "id": 2,
+    "key": "SASAnxietySelfAssessment",
+    "title": "SAS焦虑自评",
+    "status": 0,
+    "score": "?",
+    "answer": {},
+    "totalScore": "*",
+    "date": "2024-04-20"
+  },
+  {
+    "id": 3,
+    "key": "SDSDepressionSelfAssessment",
+    "title": "SDS抑郁自评",
+    "status": 0,
+    "score": 0,
+    "answer": {},
+    "totalScore": "*",
+    "date": "2024-04-19"
+  },
+  {
+    "id": 4,
+    "key": "EQ5D3L",
+    "title": "EQ-5D-3L",
+    "status": 0,
+    "score": 0,
+    "answer": {},
+    "totalScore": "*",
+    "date": "2024-04-19"
+  },
+  {
+    "id": 5,
+    "key": "MedicationComplianceSurvey",
+    "title": "用药依从性",
     "status": 1,
     "score": 5.25,
     "answer": {
@@ -19,7 +59,7 @@
     "date": "2024-04-25"
   },
   {
-    "id": 2,
+    "id": 6,
     "key": "SASAnxietySelfAssessment",
     "title": "SAS焦虑自评",
     "status": 1,
@@ -50,22 +90,49 @@
     "date": "2024-04-20"
   },
   {
-    "id": 3,
+    "id": 7,
     "key": "SDSDepressionSelfAssessment",
     "title": "SDS抑郁自评",
-    "status": 0,
-    "score": 0,
-    "answer": {},
+    "status": 1,
+    "score": 54,
+    "answer": {
+      "q1": 1,
+      "q2": 2,
+      "q3": 3,
+      "q4": 4,
+      "q5": 1,
+      "q6": 2,
+      "q7": 3,
+      "q8": 4,
+      "q9": 1,
+      "q10": 2,
+      "q11": 3,
+      "q12": 4,
+      "q13": 4,
+      "q14": 4,
+      "q15": 4,
+      "q16": 4,
+      "q17": 4,
+      "q18": 4,
+      "q19": 4,
+      "q20": 4
+    },
     "totalScore": "*",
     "date": "2024-04-19"
   },
   {
-    "id": 4,
+    "id": 8,
     "key": "EQ5D3L",
     "title": "EQ-5D-3L",
-    "status": 0,
-    "score": 0,
-    "answer": {},
+    "status": 1,
+    "score": 6,
+    "answer": {
+      "mobility": 1,
+      "selfCare": 1,
+      "usualActivities": 1,
+      "painDiscomfort": 1,
+      "anxietyDepression": 2
+    },
     "totalScore": "*",
     "date": "2024-04-19"
   }

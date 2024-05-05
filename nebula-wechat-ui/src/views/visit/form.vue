@@ -28,7 +28,7 @@ const conclusion = computed(() => {
   let color = ''
   let h_desc = h('p')
   let score = scaleAnswerData.find((item: any) => item.id == id)?.score || 0
-  if (key === 'SASAnxietySelfAssessment' || key === 'SDSGADepressionSelfAssessment') {
+  if (key === 'SASAnxietySelfAssessment' || key === 'SDSDepressionSelfAssessment') {
     score = score * 1.25
   }
 
@@ -70,7 +70,7 @@ const submit = () => {
 
 <template>
   <van-form
-    class="mt-20px mb-150px"
+    :class="['mt-20px', disabled ? 'mb-150px' : '']"
     :disabled="disabled"
     @submit="submit"
   >
