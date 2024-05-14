@@ -9,7 +9,7 @@ const router = createRouter({
   routes: [...staticRouter, ...errorRouter]
 })
 
-const whiteList = [LOGIN_URL]
+const whiteList = [LOGIN_URL, '/chat']
 
 router.beforeEach((to, _from, next) => {
   const global = globalStore(pinia)

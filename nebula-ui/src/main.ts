@@ -4,6 +4,7 @@ import App from './App.vue'
 import pinia, { globalStore } from '@/store/index.ts'
 import router, { buildRoutes } from '@/router/index.ts'
 import SvgIcon from '~virtual/svg-component'
+import 'virtual:uno.css'
 
 const app = createApp(App)
 app.use(pinia)

@@ -41,6 +41,7 @@
     "postcss-preset-env": "^9.3.0",
     "prettier": "^3.2.2",
     "typescript": "^5.3.3",
+    "unocss": "^0.60.2",
     "unplugin-auto-import": "^0.17.3",
     "unplugin-element-plus": "^0.8.0",
     "unplugin-icons": "^0.18.2",

@@ -7,6 +7,7 @@ import components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver as elementPlusResolver } from 'unplugin-vue-components/resolvers'
 import icons from 'unplugin-icons/vite'
 import iconsResolver from 'unplugin-icons/resolver'
+import unoCSS from 'unocss/vite'
 import unpluginSvgComponent from 'unplugin-svg-component/vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import elementPlus from 'unplugin-element-plus/vite'
@@ -33,6 +34,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       vue(),
       vueJsx(),
       VitePluginVueDevTools(),
+      unoCSS(),
       elementPlus({}),
       icons({
         autoInstall: true,
