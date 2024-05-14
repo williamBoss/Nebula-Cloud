@@ -91,6 +91,11 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       open: env.VITE_OPEN,
       // 代理配置
       proxy: {
+        '^/dev-api/chat/.*': {
+          target: env.VITE_PROXY_URL_AI_CHAT,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/dev-api\/chat/, '')
+        },
         '^/dev-api/.*': {
           target: env.VITE_PROXY_URL,
           changeOrigin: true,
